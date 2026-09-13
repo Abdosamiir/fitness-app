@@ -26,7 +26,7 @@ export function AppLayout() {
           <span className="font-semibold">Fitness</span>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">
-              {session?.user.name}
+              {session?.user?.name ?? "User"}
             </span>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               Sign out

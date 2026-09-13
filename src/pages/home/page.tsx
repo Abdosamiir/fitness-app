@@ -4,7 +4,7 @@ export function HomePage() {
   // Query
   const { data: session } = useSession()
   // Variables
-  const name = session?.user.name
+  const name = session?.user?.name
 
   return (
     <div className="py-16">

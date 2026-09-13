@@ -9,6 +9,8 @@ type LocationState = { from?: { pathname?: string } }
 export function LoginPage() {
   const { data: session, isPending } = useSession()
   const location = useLocation()
+  console.log("session:", session)
+console.log("isPending:", isPending)
 
   if (isPending) {
     return null

@@ -4,7 +4,7 @@ import { LoginPage } from "@/pages/auth/login/page"
 import { AuthLayout } from "@/features/auth/layouts/layout"
 import { AppLayout } from "@/shared/layout/app-layout"
 import { HomePage } from "@/pages/home/page"
-// import { ProtectedRoute } from "@/pages/protected-route"
+import { ProtectedRoute } from "@/pages/protected-route"
 import { ROUTES } from "@/pages/routes"
 
 export const router = createBrowserRouter([
@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
   },
   {
     // Signed-in app — guard first, then the header + nav shell.
-    // element: <ProtectedRoute />,
+    element: <ProtectedRoute />,
     children: [
       {
         element: <AppLayout />,
