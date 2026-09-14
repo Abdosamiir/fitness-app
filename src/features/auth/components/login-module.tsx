@@ -1,3 +1,6 @@
+import { Button } from "@/shared/components/ui/button";
+import { Input } from "@/shared/components/ui/input";
+
 export function LoginModule() {
   return (
     <div className="flex flex-col gap-6">
@@ -8,6 +11,8 @@ export function LoginModule() {
         </p>
       </div>
       Login Form
+      <Input/>
+      <Button> Login </Button>
     </div>
   )
 }

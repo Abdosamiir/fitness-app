@@ -192,3 +192,7 @@
     @apply font-sans;
     }
 }
+
+@utility auth-shadow {
+    box-shadow: 0px 4px 79.8px 47px #00000040;
+}

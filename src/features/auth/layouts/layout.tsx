@@ -7,18 +7,9 @@ import { Outlet } from "react-router"
  */
 export function AuthLayout() {
   return (
-    <div className="grid min-h-svh lg:grid-cols-2">
-      <div className="hidden flex-col justify-between bg-primary p-10 text-primary-foreground lg:flex">
-        <span className="text-lg font-semibold">Fitness</span>
-        <div className="space-y-2">
-          <p className="text-xl font-medium text-balance">
-            Plan your training, track every session, and watch the progress add
-            up.
-          </p>
-          <p className="text-sm text-primary-foreground/70">
-            Sign in to pick up where you left off.
-          </p>
-        </div>
+    <div className="grid min-h-svh lg:grid-cols-2 bg-[url('/auth-layout.png')] bg-cover bg-center bg-no-repeat">
+      <div className="hidden flex-col justify-between p-10 text-primary-foreground lg:flex border-r-2 border-r-brand-500/20">
+
       </div>
 
       <div className="flex items-center justify-center p-6">
