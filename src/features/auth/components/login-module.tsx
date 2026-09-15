@@ -1,5 +1,5 @@
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
+import { Button } from "@/shared/components/ui/button"
+import { Input } from "@/shared/components/ui/input"
 
 export function LoginModule() {
   return (
@@ -11,7 +11,7 @@ export function LoginModule() {
         </p>
       </div>
       Login Form
-      <Input/>
+      <Input />
       <Button> Login </Button>
     </div>
   )
