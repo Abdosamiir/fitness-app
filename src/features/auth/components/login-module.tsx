@@ -1,7 +1,20 @@
-import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
+"use client"
+import { Button } from "@/shared/components/ui/button"
+import { Input } from "@/shared/components/ui/input"
+import { useForm } from "react-hook-form"
 
 export function LoginModule() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  })
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1.5">
@@ -11,7 +24,7 @@ export function LoginModule() {
         </p>
       </div>
       Login Form
-      <Input/>
+      <Input />
       <Button> Login </Button>
     </div>
   )
