@@ -6,11 +6,10 @@ export const setAccessToken = (token: string) => {
   try {
     if (!token) return
     Cookies.set(accessTokenKey, token, {
-      httpOnly: true,
       secure: true,
       sameSite: "strict",
       path: "/",
-      maxAge: 60 * 60 * 24 * 7,
+      expires: 7, 
     })
   } catch (error) {
     console.error("Error setting access token:", error)
