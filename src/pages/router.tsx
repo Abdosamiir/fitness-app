@@ -16,12 +16,20 @@ export const router = createBrowserRouter([
   {
     // Public auth pages — split-screen shell, no header/nav.
     element: <AuthLayout />,
+    children: [{ path: ROUTES.login, element: <LoginPage /> }],
+  },
+  {
+    // Keep the registration draft alive across the account and onboarding routes.
+    element: <RegistrationFlowLayout />,
     children: [
-      { path: ROUTES.login, element: <LoginPage /> },
       {
-        element: <RegistrationFlowLayout />,
+        // Account form uses the same split-screen shell as login.
+        element: <AuthLayout />,
+        children: [{ path: ROUTES.register, element: <RegisterPage /> }],
+      },
+      {
+        element: <AuthLayout />,
         children: [
-          { path: ROUTES.register, element: <RegisterPage /> },
           { path: ROUTES.onboardingGender, element: <GenderStepPage /> },
           { path: ROUTES.onboardingAge, element: <AgeStepPage /> },
           { path: ROUTES.onboardingWeight, element: <WeightStepPage /> },
