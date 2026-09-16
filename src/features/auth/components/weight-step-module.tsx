@@ -11,12 +11,10 @@ export function WeightStepModule() {
   // State
   const { draft, updateDraft } = useRegistration()
   const [weight, setWeight] = useState(draft.weight ?? DEFAULT_WEIGHT)
-  const [isSaved, setIsSaved] = useState(false)
 
   // Functions
   const saveWeight = () => {
     updateDraft({ weight })
-    setIsSaved(true)
   }
 
   return (
@@ -29,10 +27,7 @@ export function WeightStepModule() {
         label="Kg"
         max={250}
         min={30}
-        onChange={(value) => {
-          setWeight(value)
-          setIsSaved(false)
-        }}
+        onChange={setWeight}
         value={weight}
       />
       <Button
@@ -42,11 +37,6 @@ export function WeightStepModule() {
       >
         Done
       </Button>
-      {isSaved && (
-        <p className="mt-3 text-sm text-white/70">
-          Saved. The remaining onboarding steps can continue from this draft.
-        </p>
-      )}
     </OnboardingStep>
   )
 }
