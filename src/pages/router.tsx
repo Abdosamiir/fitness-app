@@ -1,4 +1,5 @@
-import { createBrowserRouter } from "react-router"
+import { createBrowserRouter } from "react-router";
+import { ForgotPasswordScreen } from "@/features/auth/components/forget-password/forget-password-mainscreen";
 
 import { LoginPage } from "@/pages/auth/login/page"
 import { RegisterPage } from "@/pages/auth/register/page"
@@ -16,7 +17,10 @@ export const router = createBrowserRouter([
   {
     // Public auth pages — split-screen shell, no header/nav.
     element: <AuthLayout />,
-    children: [{ path: ROUTES.login, element: <LoginPage /> }],
+    children: [
+      { path: ROUTES.login, element: <LoginPage /> },
+    { path: ROUTES.forgetPassword, element: <ForgotPasswordScreen /> },
+    ],
   },
   {
     // Keep the registration draft alive across the account and onboarding routes.
