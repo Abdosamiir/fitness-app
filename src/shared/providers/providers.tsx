@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-
+import { Toaster } from "sonner"
 import { QueryProvider } from "@/shared/providers/components/query-provider"
 import { ThemeProvider } from "@/shared/providers/components/theme-provider"
 
@@ -9,7 +9,10 @@ import { ThemeProvider } from "@/shared/providers/components/theme-provider"
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
-      <QueryProvider>{children}</QueryProvider>
+      <QueryProvider>
+        {children}
+      <Toaster position="top-right" richColors closeButton />
+      </QueryProvider>
     </ThemeProvider>
   )
 }
