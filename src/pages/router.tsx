@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router";
 import { ForgotPasswordScreen } from "@/features/auth/components/forget-password/forget-password-mainscreen";
-
 import { LoginPage } from "@/pages/auth/login/page"
 import { RegisterPage } from "@/pages/auth/register/page"
 import { GenderStepPage } from "@/pages/auth/onboarding/gender/page"
