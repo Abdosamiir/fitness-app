@@ -9,31 +9,30 @@ import hero from "@/assets/imgs/hero.png"
  */
 export function AuthLayout() {
   return (
-    <div className="relative min-h-svh bg-[url('/auth-layout.jpeg')] bg-cover bg-center bg-no-repeat">
-      {/* layer */}
-      <div className="absolute inset-0 grid bg-black/80 lg:grid-cols-2">
-        {/* logo */}
-        <img
-          src={fit1}
-          alt="fit logo"
-          className="absolute left-1/2 h-37.5 w-62.75 -translate-x-1/2 object-contain"
-        />
-        {/* border */}
-        <div className="absolute top-[20%] left-1/2 hidden h-[70%] w-0.5 -translate-x-1/2 bg-linear-to-b from-transparent via-white/20 to-transparent lg:block" />
-        {/* Hero */}
-        <div className="hidden items-center justify-center bg-gray-600/25 text-primary-foreground lg:flex">
-          <div className="flex flex-col items-center justify-center">
+    <div className="flex min-h-svh flex-col">
+      <div className="relative flex-1 bg-[url('/auth-layout.jpeg')] bg-cover bg-center bg-no-repeat">
+        {/* layer */}
+        <div className="grid min-h-svh bg-black/80 lg:grid-cols-2">
+          {/* Desktop brand artwork */}
+          <div className="relative hidden items-center justify-center text-primary-foreground lg:flex">
             <img
-              src={hero}
-              alt="hero logo"
-              className="h-150 w-150 object-contain"
+              src={fit1}
+              alt="Super Fitness"
+              className="absolute top-[7%] left-1/2 h-auto w-56 -translate-x-1/2 object-contain"
             />
+            <div className="flex h-full items-end justify-center">
+              <img
+                src={hero}
+                alt="Super Fitness athlete"
+                className="h-[72%] max-h-150 w-auto object-contain"
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="flex items-center justify-center bg-gray-600/25 p-6">
-          <div className="w-full max-w-sm">
-            <Outlet />
+          <div className="flex items-center justify-center p-6">
+            <div className="w-full max-w-sm">
+              <Outlet />
+            </div>
           </div>
         </div>
       </div>
