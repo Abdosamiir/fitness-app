@@ -1,15 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { LoginPage } from "@/pages/auth/login/page";
-
-
-import { AuthLayout } from "@/features/auth/layouts/layout";
-import { AppLayout } from "@/shared/layout/app-layout";
-import { HomePage } from "@/pages/home/page";
-import { ProtectedRoute } from "@/pages/protected-route";
-import { ROUTES } from "@/pages/routes";
-
 import { ForgotPasswordScreen } from "@/features/auth/components/forget-password/forget-password-mainscreen";
-
 import { LoginPage } from "@/pages/auth/login/page"
 import { RegisterPage } from "@/pages/auth/register/page"
 import { GenderStepPage } from "@/pages/auth/onboarding/gender/page"
