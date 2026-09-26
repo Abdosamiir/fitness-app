@@ -1,12 +1,15 @@
 import { Outlet } from "react-router"
 
-import { RegistrationProvider } from "@/features/auth/components/registration-provider"
+import { RegisterProvider } from "@/features/auth/components/registration-provider"
 
-/** Keeps the multi-step registration draft alive while its child routes change. */
+/**
+ * Keeps the registration draft alive while navigating
+ * between the registration steps.
+ */
 export function RegistrationFlowLayout() {
   return (
-    <RegistrationProvider>
+    <RegisterProvider>
       <Outlet />
-    </RegistrationProvider>
+    </RegisterProvider>
   )
 }
