@@ -1,13 +1,10 @@
+import { UpcomingWorkoutsSection } from "@/features/home/components/upcoming-workouts-section"
+
 export function HomePage() {
   return (
-    <div className="py-16">
-      <h1 className="text-xl font-semibold">
-        Welcome
-      </h1>
-      <p className="mt-1 text-sm text-muted-foreground">
-        You&apos;re signed in. Add your features under{" "}
-        <code className="font-mono">src/features/</code>.
-      </p>
+    <div className="relative left-1/2 w-[100dvw] max-w-[100dvw] -translate-x-1/2 overflow-x-clip">
+      {/* Keep the shared app shell unchanged while this section spans the viewport. */}
+      <UpcomingWorkoutsSection />
     </div>
   )
 }
