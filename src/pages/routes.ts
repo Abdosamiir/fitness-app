@@ -3,7 +3,7 @@
  * hardcode a URL string or derive one from a folder name — import from here.
  */
 export const ROUTES = {
-home: "/",
+  home: "/",
   login: "/login",
   register: "/register",
   onboardingGender: "/register/gender",
