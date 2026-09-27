@@ -7,6 +7,9 @@ import type {
   Gender,
   RegistrationGoal,
 } from "../lib/types/registration"
+import { setAccessToken } from "../lib/utils/token"
+import { useNavigate } from "react-router"
+import { setUser } from "../lib/utils/user"
 
 interface RegisterPayload {
   firstName: string
@@ -22,13 +25,33 @@ interface RegisterPayload {
   activityLevel: ActivityLevel
 }
 
-interface RegisterResponse {
-  status: boolean
-  error?: string
-  message?: string
+interface RegisterUser {
+  firstName: string
+  lastName: string
+  email: string
+  gender: Gender
+  age: number
+  weight: number
+  height: number
+  activityLevel: ActivityLevel
+  goal: RegistrationGoal
+  photo: string
+  _id: string
+  createdAt: string
 }
 
+interface RegisterResponse {
+  status?: boolean
+  error?: string
+  message: string
+  user: RegisterUser
+  token: string
+}
+
+
 export function useRegisterActivityStep() {
+  const navigate = useNavigate()
+
   const { draft, updateDraft } = useRegistration()
 
   const mutation = useMutation({
@@ -63,15 +86,21 @@ export function useRegisterActivityStep() {
 
       console.log(data)
 
-      if (!response.ok || !data.status) {
+      if (!response.ok || data.status === false || data.error) {
         throw new Error(data.error || data.message || "Registration failed")
       }
 
       return data
     },
 
-    onSuccess: (_, activityLevel) => {
+    onSuccess: (data, activityLevel) => {
       updateDraft({ activityLevel })
+
+      setAccessToken(data.token)
+
+      setUser(data.user)
+
+      navigate("/", { replace: true })
     },
   })
 
