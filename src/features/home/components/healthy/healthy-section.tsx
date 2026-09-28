@@ -2,24 +2,23 @@ import { Dumbbell } from "lucide-react"
 
 import healthyTitle from "@/assets/imgs/healthy-title.png"
 import mealsBg from "@/assets/imgs/meals.jpg"
-import breakfastImg from "@/assets/imgs/meal-breakfast.png"
-import lunchImg from "@/assets/imgs/meal-lunch.png"
-import dinnerImg from "@/assets/imgs/meal-dinner.png"
+import { useMealCategories } from "@/features/home/lib/queries/meal-categories"
 import ProductCard from "@/features/product/components/product-card"
 import { ROUTES } from "@/pages/routes"
-
-// Variables
-const MEALS = [
-  { title: "Breakfast", image: breakfastImg },
-  { title: "Lunch", image: lunchImg },
-  { title: "Dinner", image: dinnerImg },
-]
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/shared/components/ui/carousel"
 
 /**
  * Home "Healthy" section: full-bleed food photo with a frosted band behind the
  * heading, then the meal cards. Content uses the same container as the footer.
  */
 const HealthySection = () => {
+  // Query
+  const { data: categories, isPending, isError } = useMealCategories()
+
   return (
     <section className="relative isolate w-full overflow-hidden">
       {/* Background photo + frosted band behind the heading */}
@@ -54,17 +53,41 @@ const HealthySection = () => {
           <span className="text-primary">meal plans</span> for you
         </h2>
 
-        <ul className="mt-8 grid w-full grid-cols-1 gap-8.5 sm:grid-cols-2 lg:grid-cols-3">
-          {MEALS.map((meal) => (
-            <li key={meal.title}>
-              <ProductCard
-                title={meal.title}
-                image={meal.image}
-                href={ROUTES.healthy}
-              />
-            </li>
-          ))}
-        </ul>
+        {isPending && (
+          <p className="mt-8 text-sm text-muted-foreground">
+            Loading meal categories…
+          </p>
+        )}
+
+        {isError && (
+          <p className="mt-8 text-sm text-destructive">
+            Couldn't load meal categories. Please try again later.
+          </p>
+        )}
+
+        {categories && (
+          <Carousel
+            opts={{ align: "start", loop: true }}
+            className="mt-8 w-full"
+            aria-label="Meal categories"
+          >
+            <CarouselContent className="-ml-8.5">
+              {categories.map((category) => (
+                <CarouselItem
+                  key={category.idCategory}
+                  className="pl-8.5 sm:basis-1/2 lg:basis-1/3"
+                >
+                  <ProductCard
+                    title={category.strCategory}
+                    image={category.strCategoryThumb}
+                    imageAlt={category.strCategory}
+                    href={ROUTES.healthy}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        )}
       </div>
     </section>
   )
