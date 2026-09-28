@@ -38,7 +38,7 @@ export function AppLayout() {
         </div>
       </nav>
 
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4">
+      <main className="mx-auto container flex-1 px-4">
         <Outlet />
       </main>
     </div>

@@ -20,4 +20,5 @@ export type RoutePath = (typeof ROUTES)[keyof typeof ROUTES]
 /** Links rendered in the app shell nav, in order. */
 export const NAV_ITEMS: { to: RoutePath; label: string }[] = [
   { to: ROUTES.home, label: "Home" },
+  { to: ROUTES.about, label: "About" },
 ]
