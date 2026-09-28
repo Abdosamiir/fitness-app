@@ -1,59 +1,73 @@
-import { ChevronUp } from "lucide-react"
+import { Minus, Plus } from "lucide-react"
 
-type NumberSelectorProps = {
-  label: string
-  max: number
-  min: number
-  onChange: (value: number) => void
+import { Button } from "@/shared/components/ui/button"
+
+interface NumberSelectorProps {
   value: number
+  min: number
+  max: number
+  label: string
+  onChange: (value: number) => void
 }
 
-const VISIBLE_OFFSET_COUNT = 3
-
 export function NumberSelector({
-  label,
-  max,
-  min,
-  onChange,
   value,
+  min,
+  max,
+  label,
+  onChange,
 }: NumberSelectorProps) {
-  const visibleValues = Array.from(
-    { length: VISIBLE_OFFSET_COUNT * 2 + 1 },
-    (_, index) => value + index - VISIBLE_OFFSET_COUNT
-  ).filter((option) => option >= min && option <= max)
+  const decrement = () => {
+    if (value <= min) return
+
+    onChange(value - 1)
+  }
+
+  const increment = () => {
+    if (value >= max) return
+
+    onChange(value + 1)
+  }
 
   return (
     <div className="flex flex-col items-center">
-      <span className="mb-4 text-sm font-medium text-brand-500">{label}</span>
-      <div className="flex min-h-12 items-center justify-center gap-3 sm:gap-4">
-        {visibleValues.map((option) => {
-          const distance = Math.abs(option - value)
+      <div className="flex items-center gap-8">
+        <Button
+          type="button"
+          size="icon"
+          variant="outline"
+          disabled={value <= min}
+          onClick={decrement}
+          aria-label={`Decrease ${label}`}
+          className="size-10 rounded-full"
+        >
+          <Minus size={18} />
+        </Button>
 
-          return (
-            <button
-              aria-label={`Select ${option} ${label}`}
-              aria-pressed={option === value}
-              className={
-                option === value
-                  ? "font-brand text-4xl font-extrabold text-brand-500"
-                  : distance === 1
-                    ? "font-brand text-3xl font-bold text-white/85"
-                    : "font-brand text-lg font-bold text-white/40"
-              }
-              key={option}
-              onClick={() => onChange(option)}
-              type="button"
-            >
-              {option}
-            </button>
-          )
-        })}
+        <div className="min-w-32 text-center">
+          <div className="font-brand text-5xl font-bold text-white">
+            {value}
+          </div>
+
+          <div className="mt-1 text-sm text-white/60">{label}</div>
+        </div>
+
+        <Button
+          type="button"
+          size="icon"
+          variant="outline"
+          disabled={value >= max}
+          onClick={increment}
+          aria-label={`Increase ${label}`}
+          className="size-10 rounded-full"
+        >
+          <Plus size={18} />
+        </Button>
       </div>
-      <ChevronUp
-        aria-hidden="true"
-        className="mt-3 text-brand-500"
-        fill="currentColor"
-      />
+
+      <p className="mt-4 text-xs text-white/40">
+        {min} - {max}
+      </p>
     </div>
   )
 }
