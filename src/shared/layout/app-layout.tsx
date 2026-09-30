@@ -1,3 +1,4 @@
+import Footer from "@/shared/components/footer/footer"
 import { NavLink, Outlet } from "react-router"
 import { NAV_ITEMS } from "@/pages/routes"
 import { cn } from "@/shared/lib/utils/utils"
@@ -39,8 +40,12 @@ export function AppLayout() {
       </nav>
 
       <main className="mx-auto container flex-1 px-4">
+      {/* Full width: each section owns its background and inner container */}
+
         <Outlet />
       </main>
+
+      <Footer />
     </div>
   )
 }
