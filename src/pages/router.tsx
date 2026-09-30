@@ -11,6 +11,7 @@ import { AppLayout } from "@/shared/layout/app-layout"
 import { HomePage } from "@/pages/home/page"
 import { ProtectedRoute } from "@/pages/protected-route"
 import { ROUTES } from "@/pages/routes"
+import { AboutPage } from "./about/page";
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +47,9 @@ export const router = createBrowserRouter([
     children: [
       {
         element: <AppLayout />,
-        children: [{ index: true, element: <HomePage /> }],
+        children: [{ index: true, element: <HomePage /> }, { path: ROUTES.about, element: <AboutPage />}],
+       
+        
       },
     ],
   },
