@@ -1,14 +1,14 @@
 import { AboutSection } from "@/shared/components/about-us-section";
-import Header from "@/shared/layout/header"
 import HealthySection from "@/features/home/components/healthy/healthy-section"
+import Hero from "@/features/home/components/hero";
+import Marquee from "@/features/home/components/marquee";
+// import Marquee from "@/features/home/components/marquee";
 
 export function HomePage() {
   return (<>
-    <Header />
     <div className="py-16 w-full">
-      <h1 className="text-xl font-semibold">
-        Welcome
-      </h1>
+       <Hero />
+       <Marquee />
       <AboutSection />
       <HealthySection />
     </div>

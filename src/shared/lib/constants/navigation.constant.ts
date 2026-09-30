@@ -3,19 +3,19 @@ import type { NavigationItem } from "@/shared/lib/types/navigation"
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   {
     label: "Home",
-    href: "#home",
+    href: "/",
     active: true,
   },
   {
     label: "About",
-    href: "#about",
+    href: "/about",
   },
   {
     label: "Classes",
-    href: "#classes",
+    href: "/classes",
   },
   {
     label: "Healthy",
-    href: "#healthy",
+    href: "/healthy",
   },
 ]
