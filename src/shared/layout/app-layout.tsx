@@ -2,6 +2,9 @@ import Footer from "@/shared/components/footer/footer"
 import { NavLink, Outlet } from "react-router"
 import { NAV_ITEMS } from "@/pages/routes"
 import { cn } from "@/shared/lib/utils/utils"
+import Header from "./header"
+import Hero from "../../features/home/components/hero"
+import Marquee from "../../features/home/components/marquee"
 
 /**
  * Layout route for the signed-in app: a header (brand + account), a primary
@@ -11,11 +14,11 @@ import { cn } from "@/shared/lib/utils/utils"
 export function AppLayout() {
   return (
     <div className="flex min-h-svh flex-col">
-      <header className="border-b border-border">
-        <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between px-4">
-          <span className="font-semibold">Fitness</span>
-        </div>
-      </header>
+      <Header />
+
+      <Hero />
+
+      <Marquee />
 
       <nav className="border-b border-border">
         <div className="mx-auto flex w-full max-w-4xl gap-1 px-4 py-2">
