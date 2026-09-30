@@ -2,7 +2,8 @@ import { AboutSection } from "@/shared/components/about-us-section";
 import HealthySection from "@/features/home/components/healthy/healthy-section"
 import Hero from "@/features/home/components/hero";
 import Marquee from "@/features/home/components/marquee";
-// import Marquee from "@/features/home/components/marquee";
+import { UpcomingWorkoutsSection } from "@/features/home/components/upcoming-workouts-section";
+
 
 export function HomePage() {
   return (<>
@@ -10,6 +11,7 @@ export function HomePage() {
        <Hero />
        <Marquee />
       <AboutSection />
+      <UpcomingWorkoutsSection />
       <HealthySection />
     </div>
     </>
