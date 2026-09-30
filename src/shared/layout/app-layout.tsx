@@ -39,7 +39,7 @@ export function AppLayout() {
         </div>
       </nav>
 
-      <main className="mx-auto container flex-1 px-4">
+      <main className="flex-1 px-4">
       {/* Full width: each section owns its background and inner container */}
 
         <Outlet />
