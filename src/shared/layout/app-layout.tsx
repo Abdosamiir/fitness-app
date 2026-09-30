@@ -13,7 +13,7 @@ export function AppLayout() {
   return (
     <div className="flex min-h-svh flex-col">
       <Header />
-      <main className="flex-1 px-4">
+      <main className=" flex-1 px-4">
         {/* Full width: each section owns its background and inner container */}
 
         <Outlet />
