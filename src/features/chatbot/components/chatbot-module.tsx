@@ -39,6 +39,8 @@ export function ChatbotModule() {
   // State
   const [open, setOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  // True from opening until the close animation has fully finished.
+  const [panelVisible, setPanelVisible] = useState(false)
 
   // Mutation
   const {
@@ -106,20 +108,32 @@ export function ChatbotModule() {
 
   function handleOpenChange(nextOpen: boolean) {
     setOpen(nextOpen)
-    if (!nextOpen) setMenuOpen(false)
+    if (nextOpen) setPanelVisible(true)
+    else setMenuOpen(false)
+  }
+
+  function handleOpenChangeComplete(isOpen: boolean) {
+    if (!isOpen) setPanelVisible(false)
   }
 
   return (
-    <Drawer open={open} onOpenChange={handleOpenChange} modal={false}>
-      {/* Closed state: robot floating in the corner */}
+    <Drawer
+      open={open}
+      onOpenChange={handleOpenChange}
+      onOpenChangeComplete={handleOpenChangeComplete}
+      modal={false}
+    >
+      {/* Closed state: robot floating in the corner. Hidden instantly on open,
+          and only fades back in once the panel has fully left the screen. */}
       <DrawerTrigger
         aria-label="Open Smart Coach chat"
-        className="group/robot fixed right-4 bottom-4 z-40 transition-[opacity,scale] duration-300 outline-none data-popup-open:pointer-events-none data-popup-open:scale-90 data-popup-open:opacity-0 md:right-8 md:bottom-8"
+        data-hidden={panelVisible || undefined}
+        className="group/robot fixed right-4 bottom-4 z-40 transition-[opacity,scale] duration-300 outline-none data-hidden:pointer-events-none data-hidden:scale-90 data-hidden:opacity-0 data-hidden:duration-0 md:right-8 md:bottom-8"
       >
         <ChatbotRobot label="Hey Ask Me" />
       </DrawerTrigger>
 
-      <DrawerContent className="dark rounded-3xl border-2 border-primary bg-transparent font-brand shadow-2xl shadow-black/60 [--drawer-inset:--spacing(4)] data-[swipe-axis=y]:left-auto md:[--drawer-inset:--spacing(8)] dark:border-primary">
+      <DrawerContent className="dark rounded-3xl border-2 border-primary bg-transparent font-brand shadow-2xl shadow-black/60 [--drawer-inset:--spacing(4)] data-ending-style:duration-200 data-ending-style:ease-in data-[swipe-axis=y]:left-auto md:[--drawer-inset:--spacing(8)] dark:border-primary">
         {/* Open state: the robot sits on the panel's top edge as its close button */}
         <DrawerClose
           aria-label="Close Smart Coach chat"
