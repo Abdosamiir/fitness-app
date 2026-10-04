@@ -1,10 +1,12 @@
-import Footer from "@/shared/components/footer/footer"
 import { Outlet } from "react-router"
 
+import { ChatbotModule } from "@/features/chatbot/components/chatbot-module"
+import Footer from "@/shared/components/footer/footer"
+
 /**
- * Layout route for the signed-in app: a header (brand + account), a primary
- * nav row, and the routed page below. Only ever rendered inside
- * `<ProtectedRoute>`, so a session is always present here.
+ * Layout route for the signed-in app: the routed page, the footer, and the
+ * floating Smart Coach chatbot. Only ever rendered inside `<ProtectedRoute>`,
+ * so a session is always present here.
  */
 export function AppLayout() {
   return (
@@ -15,6 +17,8 @@ export function AppLayout() {
       </main>
 
       <Footer />
+
+      <ChatbotModule />
     </div>
   )
 }
