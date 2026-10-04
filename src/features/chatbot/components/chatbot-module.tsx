@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { TextAlignEndIcon } from "lucide-react"
 
 import chatBackground from "@/assets/imgs/Rectangle 1.png"
@@ -10,10 +10,10 @@ import {
 import { ChatComposer } from "@/features/chatbot/components/chat-composer"
 import { ChatbotRobot } from "@/features/chatbot/components/chatbot-robot"
 import {
-  INITIAL_MESSAGES,
-  MOCK_BOT_REPLY,
-  MOCK_REPLY_DELAY,
-} from "@/features/chatbot/data/chatbot-mock"
+  SMART_COACH_ERROR_TEXT,
+  WELCOME_MESSAGE,
+} from "@/features/chatbot/lib/constants/smart-coach.constant"
+import { useAskSmartCoach } from "@/features/chatbot/lib/mutations/smart-coach"
 import type { ChatMessage } from "@/features/chatbot/lib/types"
 import {
   Drawer,
@@ -39,32 +39,34 @@ import {
 export function ChatbotModule() {
   // State
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES)
-  const [isReplying, setIsReplying] = useState(false)
+  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE])
 
-  // Ref
-  const replyTimer = useRef<number | undefined>(undefined)
+  // Mutation
+  const { mutate: askSmartCoach, isPending: isReplying } = useAskSmartCoach()
 
   // Functions
-  function handleSend(text: string) {
+  function appendBotMessage(text: string, local?: boolean) {
     setMessages((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), role: "user", text },
+      { id: crypto.randomUUID(), role: "bot", text, local },
     ])
-    setIsReplying(true)
-
-    // TODO: replace with the real coach API once the backend exposes one.
-    replyTimer.current = window.setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { id: crypto.randomUUID(), role: "bot", text: MOCK_BOT_REPLY },
-      ])
-      setIsReplying(false)
-    }, MOCK_REPLY_DELAY)
   }
 
-  // Effects
-  useEffect(() => () => window.clearTimeout(replyTimer.current), [])
+  function handleSend(text: string) {
+    const conversation: ChatMessage[] = [
+      ...messages,
+      { id: crypto.randomUUID(), role: "user", text },
+    ]
+    setMessages(conversation)
+
+    askSmartCoach(conversation, {
+      onSuccess: (reply) => appendBotMessage(reply),
+      onError: (error) => {
+        console.error("Smart Coach error:", error)
+        appendBotMessage(SMART_COACH_ERROR_TEXT, true)
+      },
+    })
+  }
 
   return (
     <Drawer open={open} onOpenChange={setOpen} modal={false}>

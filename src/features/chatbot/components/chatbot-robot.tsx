@@ -35,10 +35,13 @@ export function ChatbotRobot({
         width={448}
         height={327}
         draggable={false}
-        className="w-full drop-shadow-[0_6px_10px_rgb(0_0_0/0.3)] transition-transform duration-300 select-none group-hover/robot:-translate-y-0.5"
+        // The head sits at ~57% of the asset's width (the waving hand fills
+        // the left), so nudge it left to centre the head over the label.
+        className="relative z-0 w-full -translate-x-[7%] drop-shadow-[0_6px_10px_rgb(0_0_0/0.3)] transition-transform duration-300 select-none group-hover/robot:-translate-y-0.5"
       />
 
-      <span className="-mt-4 flex h-9.5 items-center rounded-full bg-primary px-5 font-brand text-base leading-none font-bold whitespace-nowrap text-primary-foreground shadow-[0_4px_14px_color-mix(in_oklch,var(--color-brand-500)_45%,transparent)] transition-colors group-hover/robot:bg-brand-600 group-focus-visible/robot:ring-3 group-focus-visible/robot:ring-ring/50">
+      {/* Own layer so it stays above the robot's filter/transform layer */}
+      <span className="relative z-10 -mt-4 flex h-9.5 items-center justify-center rounded-full bg-primary px-5 font-brand text-base leading-none font-bold whitespace-nowrap text-primary-foreground shadow-[0_4px_14px_color-mix(in_oklch,var(--color-brand-500)_45%,transparent)] transition-colors group-hover/robot:bg-brand-600 group-focus-visible/robot:ring-3 group-focus-visible/robot:ring-ring/50">
         {label}
       </span>
     </span>
