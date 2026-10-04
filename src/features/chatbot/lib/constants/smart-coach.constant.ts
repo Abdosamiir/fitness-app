@@ -18,3 +18,9 @@ export const WELCOME_MESSAGE: ChatMessage = {
 
 export const SMART_COACH_ERROR_TEXT =
   "Sorry, I'm having trouble connecting right now. Please try again."
+
+/** localStorage key holding the saved conversations. */
+export const CONVERSATIONS_STORAGE_KEY = "smart-coach-conversations"
+
+/** Oldest conversations beyond this count are dropped. */
+export const MAX_SAVED_CONVERSATIONS = 20

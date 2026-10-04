@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useId, useState } from "react"
 import { TextAlignEndIcon } from "lucide-react"
 
 import chatBackground from "@/assets/imgs/Rectangle 1.png"
@@ -9,10 +9,9 @@ import {
 } from "@/features/chatbot/components/chat-message-bubble"
 import { ChatComposer } from "@/features/chatbot/components/chat-composer"
 import { ChatbotRobot } from "@/features/chatbot/components/chatbot-robot"
-import {
-  SMART_COACH_ERROR_TEXT,
-  WELCOME_MESSAGE,
-} from "@/features/chatbot/lib/constants/smart-coach.constant"
+import { ConversationsMenu } from "@/features/chatbot/components/conversations-menu"
+import { SMART_COACH_ERROR_TEXT } from "@/features/chatbot/lib/constants/smart-coach.constant"
+import { useConversations } from "@/features/chatbot/lib/hooks/use-conversations"
 import { useAskSmartCoach } from "@/features/chatbot/lib/mutations/smart-coach"
 import type { ChatMessage } from "@/features/chatbot/lib/types"
 import {
@@ -39,37 +38,79 @@ import {
 export function ChatbotModule() {
   // State
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE])
+  const [menuOpen, setMenuOpen] = useState(false)
 
   // Mutation
-  const { mutate: askSmartCoach, isPending: isReplying } = useAskSmartCoach()
+  const {
+    mutate: askSmartCoach,
+    isPending,
+    variables: pendingAsk,
+  } = useAskSmartCoach()
+
+  // Custom hooks
+  const {
+    activeConversation,
+    history,
+    appendMessage,
+    startNewConversation,
+    selectConversation,
+  } = useConversations()
+
+  // Variables
+  const menuId = useId()
+  const { messages } = activeConversation
+  const isReplying =
+    isPending && pendingAsk?.conversationId === activeConversation.id
 
   // Functions
-  function appendBotMessage(text: string, local?: boolean) {
-    setMessages((prev) => [
-      ...prev,
-      { id: crypto.randomUUID(), role: "bot", text, local },
-    ])
+  function handleSend(text: string) {
+    const conversationId = activeConversation.id
+    const userMessage: ChatMessage = {
+      id: crypto.randomUUID(),
+      role: "user",
+      text,
+    }
+    appendMessage(conversationId, userMessage)
+
+    askSmartCoach(
+      { conversationId, messages: [...messages, userMessage] },
+      {
+        onSuccess: (reply) =>
+          appendMessage(conversationId, {
+            id: crypto.randomUUID(),
+            role: "bot",
+            text: reply,
+          }),
+        onError: (error) => {
+          console.error("Smart Coach error:", error)
+          appendMessage(conversationId, {
+            id: crypto.randomUUID(),
+            role: "bot",
+            text: SMART_COACH_ERROR_TEXT,
+            local: true,
+          })
+        },
+      }
+    )
   }
 
-  function handleSend(text: string) {
-    const conversation: ChatMessage[] = [
-      ...messages,
-      { id: crypto.randomUUID(), role: "user", text },
-    ]
-    setMessages(conversation)
+  function handleSelectConversation(conversationId: string) {
+    selectConversation(conversationId)
+    setMenuOpen(false)
+  }
 
-    askSmartCoach(conversation, {
-      onSuccess: (reply) => appendBotMessage(reply),
-      onError: (error) => {
-        console.error("Smart Coach error:", error)
-        appendBotMessage(SMART_COACH_ERROR_TEXT, true)
-      },
-    })
+  function handleNewConversation() {
+    startNewConversation()
+    setMenuOpen(false)
+  }
+
+  function handleOpenChange(nextOpen: boolean) {
+    setOpen(nextOpen)
+    if (!nextOpen) setMenuOpen(false)
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen} modal={false}>
+    <Drawer open={open} onOpenChange={handleOpenChange} modal={false}>
       {/* Closed state: robot floating in the corner */}
       <DrawerTrigger
         aria-label="Open Smart Coach chat"
@@ -112,13 +153,41 @@ export function ChatbotModule() {
             <DrawerTitle className="font-brand text-xl font-bold">
               Smart Coach
             </DrawerTitle>
-            <TextAlignEndIcon aria-hidden className="size-6 text-primary" />
+            <button
+              type="button"
+              aria-label="Previous conversations"
+              aria-expanded={menuOpen}
+              aria-controls={menuOpen ? menuId : undefined}
+              onClick={() => setMenuOpen((prev) => !prev)}
+              className="-m-1.5 rounded-md p-1.5 text-primary transition-colors outline-none hover:bg-primary/15 focus-visible:ring-3 focus-visible:ring-ring/50"
+            >
+              <TextAlignEndIcon aria-hidden className="size-6" />
+            </button>
           </header>
 
-          <MessageScrollerProvider autoScroll defaultScrollPosition="end">
+          {menuOpen && (
+            <ConversationsMenu
+              id={menuId}
+              conversations={history}
+              activeId={activeConversation.id}
+              onSelect={handleSelectConversation}
+              onNewConversation={handleNewConversation}
+              onClose={() => setMenuOpen(false)}
+            />
+          )}
+
+          {/* Keyed so switching threads remounts and lands on the latest message */}
+          <MessageScrollerProvider
+            key={activeConversation.id}
+            autoScroll
+            defaultScrollPosition="end"
+          >
             <MessageScroller className="flex-1">
-              <MessageScrollerViewport aria-label="Smart Coach conversation">
-                <MessageScrollerContent className="gap-4 px-4 pb-4">
+              <MessageScrollerViewport
+                aria-label="Smart Coach conversation"
+                className="scrollbar-thumb-brand-800 hover:scrollbar-thumb-primary"
+              >
+                <MessageScrollerContent className="gap-4 pr-2 pb-4 pl-4">
                   {messages.map((message) => (
                     <MessageScrollerItem
                       key={message.id}
@@ -136,12 +205,12 @@ export function ChatbotModule() {
                   )}
                 </MessageScrollerContent>
               </MessageScrollerViewport>
-              <MessageScrollerButton />
+              <MessageScrollerButton className="border-primary/40 bg-card/90 text-primary hover:bg-card hover:text-primary" />
             </MessageScroller>
           </MessageScrollerProvider>
 
           <div className="px-6 pt-2 pb-6">
-            <ChatComposer disabled={isReplying} onSend={handleSend} />
+            <ChatComposer disabled={isPending} onSend={handleSend} />
           </div>
         </div>
       </DrawerContent>
