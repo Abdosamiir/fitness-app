@@ -21,4 +21,6 @@ export type RoutePath = (typeof ROUTES)[keyof typeof ROUTES]
 export const NAV_ITEMS: { to: RoutePath; label: string }[] = [
   { to: ROUTES.home, label: "Home" },
   { to: ROUTES.about, label: "About" },
+  { to: ROUTES.classes, label: "Classes" },
+  { to: ROUTES.healthy, label: "Healthy" },
 ]
