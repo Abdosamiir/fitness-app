@@ -14,6 +14,7 @@ export const CLASS_CATEGORIES: WorkoutCategoryName[] = [
 ]
 
 export const FULL_BODY_WORKOUTS: ClassWorkoutCard[] = [
+  // Page 1 (6 cards: 3 per row x 2 rows)
   {
     id: "chest",
     title: "CHEST",
@@ -61,5 +62,105 @@ export const FULL_BODY_WORKOUTS: ClassWorkoutCard[] = [
     image: "/images/classes/stomach.jpg",
     muscleGroupName: "Abdominals",
     subtitle: "Core, rectus & obliques",
+  },
+
+  // Page 2 (6 cards: 3 per row x 2 rows)
+  {
+    id: "upper-chest",
+    title: "UPPER CHEST",
+    category: "Chest",
+    image: "/images/classes/chest.jpg",
+    muscleGroupName: "Chest",
+    subtitle: "Incline power & definition",
+  },
+  {
+    id: "biceps-triceps",
+    title: "BICEPS & TRICEPS",
+    category: "Arm",
+    image: "/images/classes/arm.jpg",
+    muscleGroupName: "Biceps",
+    subtitle: "Arm sculpting & endurance",
+  },
+  {
+    id: "deltoids",
+    title: "DELTOIDS",
+    category: "Shoulder",
+    image: "/images/classes/shoulder.jpg",
+    muscleGroupName: "Shoulders",
+    subtitle: "Overhead press & mobility",
+  },
+  {
+    id: "lats-spine",
+    title: "LATS & RHOMBOIDS",
+    category: "Back",
+    image: "/images/classes/back.jpg",
+    muscleGroupName: "Back",
+    subtitle: "Pull-ups & row strength",
+  },
+  {
+    id: "hamstrings-glutes",
+    title: "HAMSTRINGS & GLUTES",
+    category: "Legs",
+    image: "/images/classes/legs.jpg",
+    muscleGroupName: "Quadriceps",
+    subtitle: "Lower body explosion",
+  },
+  {
+    id: "core-stability",
+    title: "CORE & ABS",
+    category: "Stomach",
+    image: "/images/classes/stomach.jpg",
+    muscleGroupName: "Abdominals",
+    subtitle: "Six-pack definition & stability",
+  },
+
+  // Page 3 (6 cards: 3 per row x 2 rows)
+  {
+    id: "bench-press",
+    title: "BENCH & PRESS",
+    category: "Chest",
+    image: "/images/classes/chest.jpg",
+    muscleGroupName: "Chest",
+    subtitle: "Compound pressing power",
+  },
+  {
+    id: "forearms-grip",
+    title: "FOREARMS & GRIP",
+    category: "Arm",
+    image: "/images/classes/arm.jpg",
+    muscleGroupName: "Biceps",
+    subtitle: "Grip strength & pump",
+  },
+  {
+    id: "military-press",
+    title: "MILITARY PRESS",
+    category: "Shoulder",
+    image: "/images/classes/shoulder.jpg",
+    muscleGroupName: "Shoulders",
+    subtitle: "Rotator cuff & delts",
+  },
+  {
+    id: "deadlift-back",
+    title: "DEADLIFT & SPINE",
+    category: "Back",
+    image: "/images/classes/back.jpg",
+    muscleGroupName: "Back",
+    subtitle: "Posterior chain power",
+  },
+  {
+    id: "squats-calves",
+    title: "SQUATS & CALVES",
+    category: "Legs",
+    image: "/images/classes/legs.jpg",
+    muscleGroupName: "Quadriceps",
+    subtitle: "Athletic agility & strength",
+  },
+  {
+    id: "obliques-core",
+    title: "OBLIQUES & CORE",
+    category: "Stomach",
+    image: "/images/classes/stomach.jpg",
+    muscleGroupName: "Abdominals",
+    subtitle: "Rotational trunk strength",
   },
 ]

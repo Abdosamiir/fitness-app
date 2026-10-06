@@ -1,21 +1,18 @@
-﻿import { useState } from "react"
+import { useState } from "react"
 import { ArrowUpRight } from "lucide-react"
-import type { ClassWorkoutCard } from "@/features/classes/lib/types/classes"
 
-interface ClassesCardProps {
-  workout: ClassWorkoutCard
-  onExplore?: (workout: ClassWorkoutCard) => void
-}
+import type { ClassesCardProps } from "@/features/classes/lib/types/classes"
 
 export function ClassesCard({ workout }: ClassesCardProps) {
-  const [imgSrc, setImgSrc] = useState<string>(workout.image)
-  const [hasError, setHasError] = useState(false)
+  // State
+  const [hasError, setHasError] = useState<boolean>(false)
 
+  // Variables
+  const displayImage = hasError ? "/images/classes/chest.jpg" : workout.image
+
+  // Functions
   const handleImageError = () => {
-    if (!hasError && imgSrc !== workout.image) {
-      setHasError(true)
-      setImgSrc(workout.image)
-    }
+    setHasError(true)
   }
 
   return (
@@ -25,7 +22,7 @@ export function ClassesCard({ workout }: ClassesCardProps) {
       {/* Background Image Container */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900">
         <img
-          src={imgSrc}
+          src={displayImage}
           alt={`${workout.title} workout class`}
           onError={handleImageError}
           loading="lazy"

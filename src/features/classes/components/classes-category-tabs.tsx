@@ -1,11 +1,6 @@
 import { CLASS_CATEGORIES } from "@/features/classes/lib/constants/classes.constant"
-import type { WorkoutCategoryName } from "@/features/classes/lib/types/classes"
+import type { ClassesCategoryTabsProps } from "@/features/classes/lib/types/classes"
 import { cn } from "@/shared/lib/utils/utils"
-
-interface ClassesCategoryTabsProps {
-  activeCategory: WorkoutCategoryName
-  onSelectCategory: (category: WorkoutCategoryName) => void
-}
 
 export function ClassesCategoryTabs({
   activeCategory,
