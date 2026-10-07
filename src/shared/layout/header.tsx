@@ -9,17 +9,33 @@ import { Button } from "@/shared/components/ui/button"
 import { Container } from "./container"
 
 import { getAccessToken } from "@/features/auth/lib/utils/token"
+import { getUser } from "@/features/auth/lib/utils/user"
 import { useTheme } from "@/shared/providers/components/theme-provider"
+import { ROUTES } from "@/pages/routes"
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const location = useLocation()
   const { theme, setTheme } = useTheme()
 
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!getAccessToken())
+  const currentUser = isAuthenticated ? getUser() : null
+
   useEffect(() => {
-    setIsAuthenticated(!!getAccessToken())
-  }, [])
+    const checkAuth = () => {
+      setIsAuthenticated(!!getAccessToken())
+    }
+
+    checkAuth()
+
+    window.addEventListener("auth-change", checkAuth)
+    window.addEventListener("storage", checkAuth)
+
+    return () => {
+      window.removeEventListener("auth-change", checkAuth)
+      window.removeEventListener("storage", checkAuth)
+    }
+  }, [location.pathname])
 
   const closeMenu = () => {
     setMenuOpen(false)
@@ -107,18 +123,26 @@ export default function Header() {
           </button>
 
           {isAuthenticated ? (
-            <a
-              href="/profile"
+            <Link
+              to={ROUTES.profile}
               aria-label="Profile"
-              className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-200 hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md shadow-primary/25 transition-all duration-200 hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none overflow-hidden"
             >
-              <UserRound className="size-5" />
-            </a>
+              {currentUser?.photo ? (
+                <img
+                  src={currentUser.photo}
+                  alt={currentUser.firstName || "Profile"}
+                  className="size-full object-cover"
+                />
+              ) : (
+                <UserRound className="size-5" />
+              )}
+            </Link>
           ) : (
             <>
-              <ActionLink href="#login">LOGIN</ActionLink>
+              <ActionLink href={ROUTES.login}>LOGIN</ActionLink>
 
-              <ActionLink href="#signup" variant="outline">
+              <ActionLink href={ROUTES.register} variant="outline">
                 SIGN UP
               </ActionLink>
             </>
@@ -201,19 +225,27 @@ export default function Header() {
           {/* Mobile Actions */}
           <div className="mt-5">
             {isAuthenticated ? (
-              <a
-                href="/profile"
+              <Link
+                to={ROUTES.profile}
                 onClick={closeMenu}
                 aria-label="Profile"
-                className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-200 hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md shadow-primary/25 transition-all duration-200 hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none overflow-hidden"
               >
-                <UserRound className="size-5" />
-              </a>
+                {currentUser?.photo ? (
+                  <img
+                    src={currentUser.photo}
+                    alt={currentUser.firstName || "Profile"}
+                    className="size-full object-cover"
+                  />
+                ) : (
+                  <UserRound className="size-5" />
+                )}
+              </Link>
             ) : (
               <div className="grid grid-cols-2 gap-2">
-                <ActionLink href="#login">LOGIN</ActionLink>
+                <ActionLink href={ROUTES.login}>LOGIN</ActionLink>
 
-                <ActionLink href="#signup" variant="outline">
+                <ActionLink href={ROUTES.register} variant="outline">
                   SIGN UP
                 </ActionLink>
               </div>
