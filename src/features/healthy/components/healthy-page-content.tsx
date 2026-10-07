@@ -3,7 +3,7 @@ import { useMemo, useState } from "react"
 import { HealthyCategoryTabs } from "@/features/healthy/components/healthy-category-tabs"
 import { HealthyGrid } from "@/features/healthy/components/healthy-grid"
 import { HealthyHeroHeading } from "@/features/healthy/components/healthy-hero-heading"
-import { HealthyMealDialog } from "@/features/healthy/components/healthy-meal-dialog"
+import { HealthyMealDetails } from "@/features/healthy/components/healthy-meal-details"
 
 import {
   useHealthyCategories,
@@ -39,6 +39,21 @@ export function HealthyPageContent() {
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category)
     setSelectedMeal(null)
+  }
+
+  if (selectedMeal) {
+    return (
+      <section
+        aria-label="Meal details"
+        className="relative min-h-[calc(100vh-140px)] w-full overflow-hidden bg-[#0D0D0D] text-white"
+      >
+        <HealthyMealDetails
+          meal={selectedMeal}
+          onBack={() => setSelectedMeal(null)}
+          onSelectMeal={setSelectedMeal}
+        />
+      </section>
+    )
   }
 
   return (
@@ -98,12 +113,6 @@ export function HealthyPageContent() {
           />
         )}
       </div>
-
-      <HealthyMealDialog
-        meal={selectedMeal}
-        open={Boolean(selectedMeal)}
-        onClose={() => setSelectedMeal(null)}
-      />
     </section>
   )
 }
