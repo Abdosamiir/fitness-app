@@ -75,7 +75,7 @@ export function HealthyMealDetails({
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
       <button
-        className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 font-brand text-sm font-bold transition-colors hover:border-primary hover:text-primary"
+        className="mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white px-4 py-2 font-brand text-sm font-bold text-neutral-900 shadow-sm transition-colors hover:border-primary hover:text-primary dark:border-white/15 dark:bg-neutral-900 dark:text-white dark:hover:border-primary dark:hover:text-primary"
         onClick={onBack}
         type="button"
       >
@@ -83,8 +83,8 @@ export function HealthyMealDetails({
         Back to meals
       </button>
 
-      <div className="grid overflow-hidden rounded-3xl border border-primary/60 bg-neutral-950 text-white shadow-2xl lg:grid-cols-[340px_minmax(0,1fr)]">
-        <aside className="border-b border-white/10 bg-neutral-900/95 p-4 sm:p-5 lg:border-r lg:border-b-0">
+      <div className="grid overflow-hidden rounded-3xl border border-primary/60 bg-white text-neutral-900 shadow-2xl lg:grid-cols-[340px_minmax(0,1fr)] dark:bg-neutral-950 dark:text-white">
+        <aside className="border-b border-neutral-200 bg-neutral-100/95 p-4 sm:p-5 lg:border-r lg:border-b-0 dark:border-white/10 dark:bg-neutral-900/95">
           <div
             aria-label="Meal periods"
             className="flex items-center justify-center gap-2"
@@ -100,7 +100,7 @@ export function HealthyMealDetails({
                     "rounded-full px-4 py-2 font-brand text-sm font-bold transition-colors",
                     isActive
                       ? "bg-primary text-white"
-                      : "text-white/75 hover:bg-white/10 hover:text-white"
+                      : "text-neutral-600 hover:bg-neutral-200 hover:text-neutral-950 dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
                   )}
                   key={period.label}
                   onClick={() => setActivePeriod(period.label)}
@@ -133,7 +133,7 @@ export function HealthyMealDetails({
                       "flex min-w-64 snap-start items-center gap-3 rounded-2xl border border-transparent p-3 text-left transition-colors lg:min-w-0 lg:w-full",
                       isSelected
                         ? "border-primary/60 bg-primary/10"
-                        : "border-b-white/10 hover:bg-white/5"
+                        : "border-b-neutral-200 hover:bg-neutral-200/70 dark:border-b-white/10 dark:hover:bg-white/5"
                     )}
                     key={relatedMeal.id}
                     onClick={() => onSelectMeal(relatedMeal)}
@@ -149,7 +149,7 @@ export function HealthyMealDetails({
                       <span className="line-clamp-1 block font-brand text-base font-bold">
                         {relatedMeal.name}
                       </span>
-                      <span className="mt-1 line-clamp-2 block text-xs leading-5 text-white/60">
+                      <span className="mt-1 line-clamp-2 block text-xs leading-5 text-neutral-500 dark:text-white/60">
                         Select this meal to see its recipe and ingredients.
                       </span>
                     </span>
@@ -160,7 +160,7 @@ export function HealthyMealDetails({
           )}
         </aside>
 
-        <div className="min-w-0 bg-neutral-950">
+        <div className="min-w-0 bg-white dark:bg-neutral-950">
           {mealQuery.isLoading && (
             <div className="flex min-h-150 items-center justify-center">
               <Loader2 className="size-9 animate-spin text-primary" />
@@ -173,7 +173,7 @@ export function HealthyMealDetails({
                 <h1 className="font-brand text-2xl font-black uppercase">
                   Unable to load this meal
                 </h1>
-                <p className="mt-2 text-sm text-white/60">
+                <p className="mt-2 text-sm text-neutral-500 dark:text-white/60">
                   Please return to the meals list and try again.
                 </p>
               </div>
@@ -194,7 +194,7 @@ export function HealthyMealDetails({
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-black/45 to-black/10" />
 
                 <div className="absolute inset-x-0 bottom-0 px-5 pb-6 sm:px-8 sm:pb-8">
-                  <h1 className="font-brand text-3xl font-black capitalize sm:text-5xl">
+                  <h1 className="font-brand text-3xl font-black text-white capitalize sm:text-5xl">
                     {mealQuery.data.name}
                   </h1>
                   <p className="mt-3 max-w-3xl text-sm leading-6 text-white/75 sm:text-base">
@@ -224,10 +224,10 @@ export function HealthyMealDetails({
                 <div className="mt-5 grid gap-x-12 sm:grid-cols-2">
                   {mealQuery.data.ingredients.map((ingredient, index) => (
                     <div
-                      className="flex items-start justify-between gap-4 border-b border-white/10 py-3 text-sm"
+                      className="flex items-start justify-between gap-4 border-b border-neutral-200 py-3 text-sm dark:border-white/10"
                       key={`${ingredient.name}-${index}`}
                     >
-                      <span className="font-medium text-white/85">
+                      <span className="font-medium text-neutral-700 dark:text-white/85">
                         {ingredient.name}
                       </span>
                       <span className="text-right text-primary">

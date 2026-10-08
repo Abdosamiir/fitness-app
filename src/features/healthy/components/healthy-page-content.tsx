@@ -45,7 +45,7 @@ export function HealthyPageContent() {
     return (
       <section
         aria-label="Meal details"
-        className="relative min-h-[calc(100vh-140px)] w-full overflow-hidden bg-[#0D0D0D] text-white"
+        className="relative min-h-[calc(100vh-140px)] w-full overflow-hidden bg-[#F7F7F8] text-neutral-900 transition-colors duration-300 dark:bg-[#0D0D0D] dark:text-white"
       >
         <HealthyMealDetails
           meal={selectedMeal}
