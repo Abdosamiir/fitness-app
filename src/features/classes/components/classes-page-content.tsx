@@ -1,16 +1,25 @@
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
+import { useSearchParams } from "react-router"
 import { ClassesCategoryTabs } from "@/features/classes/components/classes-category-tabs"
 import { ClassesGrid } from "@/features/classes/components/classes-grid"
 import { ClassesHeroHeading } from "@/features/classes/components/classes-hero-heading"
-import { FULL_BODY_WORKOUTS } from "@/features/classes/lib/constants/classes.constant"
+import { CLASS_CATEGORIES, FULL_BODY_WORKOUTS } from "@/features/classes/lib/constants/classes.constant"
 import { useMuscleGroups } from "@/features/classes/lib/hooks/use-classes"
 import type { WorkoutCategoryName } from "@/features/classes/lib/types/classes"
 import { mapMuscleGroupToCard } from "@/features/classes/lib/utils/classes.util"
 
 export function ClassesPageContent() {
   // State
-  const [activeCategory, setActiveCategory] =
-    useState<WorkoutCategoryName>("Full Body")
+  const [searchParams, setSearchParams] = useSearchParams()
+  const requestedCategory = searchParams.get("category")
+  // Validate incoming home-page links against the team's supported categories.
+  const activeCategory = CLASS_CATEGORIES.find((category) => category === requestedCategory) ?? "Full Body"
+  const setActiveCategory = (category: WorkoutCategoryName) => {
+    setSearchParams((params) => {
+      params.set("category", category)
+      return params
+    })
+  }
 
   // TanStack Query: fetch live muscle groups from API with env URL & key
   const { data: muscleGroups = [], isLoading } = useMuscleGroups()
