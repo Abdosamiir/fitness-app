@@ -9,7 +9,7 @@ type WorkoutCardProps = {
 export function WorkoutCard({ workout }: WorkoutCardProps) {
   return (
     <article className="group min-w-full snap-center overflow-hidden rounded-2xl bg-neutral-50 shadow-sm sm:min-w-[calc(50%-0.75rem)] lg:min-w-0 dark:bg-neutral-800">
-      <div className="aspect-[4/3] overflow-hidden">
+      <div className="aspect-4/3 overflow-hidden">
         <img
           alt={workout.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
