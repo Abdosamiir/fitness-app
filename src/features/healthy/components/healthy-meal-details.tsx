@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { ArrowLeft, Loader2 } from "lucide-react"
 
-import mealDetailsFallback from "@/features/healthy/assets/meal-details-fallback.png"
+import mealDetailsFallback from "@/assets/imgs/meal-details-fallback.png"
 import {
   useHealthyMeal,
   useHealthyMeals,
