@@ -10,7 +10,7 @@ export default function WhyUs() {
     <section className="py-10">
       {/* container */}
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between gap-14">
+        <div className="flex flex-col lg:flex-row justify-between gap-14">
           {/* left side */}
           <div className="flex-1">
             {/* content */}
@@ -23,15 +23,15 @@ export default function WhyUs() {
                   aria-hidden
                   width={258}
                   height={43}
-                  className="-z-20 h-10.75 w-auto select-none"
+                  className="-z-20 h-10.75 w-auto select-none hidden lg:block"
                 />
                 <p className="-mt-6 ml-2 flex items-center gap-2.5 text-sm font-medium text-primary">
                   <Dumbbell className="size-8 rotate-45" strokeWidth={1} />
                   Why Us
                 </p>
               </div>
-              <h3 className="mt-3 font-baloo text-[40px] font-bold uppercase">
-                Elevate fitness with the <br />
+              <h3 className="mt-3 font-baloo text-xl md:text-[30px] lg:text-[40px] font-bold uppercase">
+                Elevate fitness with the <br className="hidden md:block"/>
                 <span className="text-brand-500">BEST WAY</span> possible
               </h3>
               <p className="mt-6 text-lg">
@@ -45,7 +45,7 @@ export default function WhyUs() {
             <ul className="mt-16 space-y-8">
               <li className="flex items-center gap-6">
                 {/* circle */}
-                <div className="flex size-15 shrink-0 items-center justify-center rounded-full bg-brand-500 text-[11px] font-bold text-[#F3F3F4]">
+                <div className="flex size-15 shrink-0 border border-[#F3F3F4]/40 items-center justify-center rounded-full bg-brand-500 text-[11px] font-bold text-[#F3F3F4]">
                   01
                 </div>
                 {/* content */}
@@ -61,7 +61,7 @@ export default function WhyUs() {
               </li>
               <li className="flex items-center gap-6">
                 {/* circle */}
-                <div className="flex size-15 shrink-0 items-center justify-center rounded-full bg-brand-500 text-[11px] font-bold text-[#F3F3F4]">
+                <div className="flex size-15 shrink-0 border border-[#F3F3F4]/40 items-center justify-center rounded-full bg-brand-500 text-[11px] font-bold text-[#F3F3F4]">
                   02
                 </div>
                 {/* content */}
@@ -77,7 +77,7 @@ export default function WhyUs() {
               </li>
               <li className="flex items-center gap-6">
                 {/* circle */}
-                <div className="flex size-15 shrink-0 items-center justify-center rounded-full bg-brand-500 text-[11px] font-bold text-[#F3F3F4]">
+                <div className="flex size-15 shrink-0 border border-[#F3F3F4]/40 items-center justify-center rounded-full bg-brand-500 text-[11px] font-bold text-[#F3F3F4]">
                   03
                 </div>
                 {/* content */}
