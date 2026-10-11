@@ -3,15 +3,17 @@
  * hardcode a URL string or derive one from a folder name — import from here.
  */
 export const ROUTES = {
-  home: "/",
+home: "/",
   login: "/login",
   register: "/register",
+  onboardingGender: "/register/gender",
+  onboardingAge: "/register/age",
+  onboardingWeight: "/register/weight",
   forgetPassword: "/forget-password",
-  resetPassword: "/reset-password",
   about: "/about",
   classes: "/classes",
   healthy: "/healthy",
-} as const
+} as const;
 
 export type RoutePath = (typeof ROUTES)[keyof typeof ROUTES]
 
