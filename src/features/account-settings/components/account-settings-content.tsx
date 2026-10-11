@@ -11,6 +11,7 @@ import { SecurityModal } from "./security-modal"
 import { PrivacyPolicyModal } from "./privacy-policy-modal"
 import { HelpModal } from "./help-modal"
 import { LogoutModal } from "./logout-modal"
+import { ACCOUNT_LEVEL_OPTIONS } from "../lib/constants/account-settings.constant"
 import type { AccountGoal, AccountLevel, LanguageCode } from "../lib/types/account-settings"
 
 type ModalType =
@@ -59,7 +60,11 @@ export function AccountSettingsContent() {
         {/* Top 3 Status Pills */}
         <AccountMetricsBar
           goal={profile.goal || "Lose weight"}
-          level={profile.activityLevel || "Beginner"}
+          level={
+            ACCOUNT_LEVEL_OPTIONS.find(
+              (option) => option.id === profile.activityLevel
+            )?.label || "Beginner"
+          }
           weight={profile.weight || 90}
           onOpenGoalModal={() => setActiveModal("goal")}
           onOpenLevelModal={() => setActiveModal("level")}

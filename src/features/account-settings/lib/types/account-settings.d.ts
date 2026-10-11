@@ -1,11 +1,8 @@
-export type AccountGoal =
-  | "Gain weight"
-  | "Lose weight"
-  | "Get fitter"
-  | "Gain more flexible"
-  | "Learn the basic"
+import type { User } from "@/features/auth/lib/utils/user"
 
-export type AccountLevel = "Beginner" | "Intermediate" | "Advanced"
+export type AccountGoal = User["goal"]
+
+export type AccountLevel = User["activityLevel"]
 
 export type LanguageCode = "en" | "ar" | "fr" | "es" | "de"
 
@@ -18,8 +15,8 @@ export interface UserProfileData {
   age?: number
   weight?: number
   height?: number
-  activityLevel?: string
-  goal?: AccountGoal | string
+  activityLevel?: AccountLevel
+  goal?: AccountGoal
   photo?: string
   createdAt?: string
 }
@@ -40,9 +37,9 @@ export interface ChangePasswordPayload {
 export interface EditProfilePayload {
   firstName?: string
   lastName?: string
-  goal?: string
+  goal?: AccountGoal
   weight?: number
-  activityLevel?: string
+  activityLevel?: AccountLevel
   height?: number
   age?: number
   gender?: "male" | "female"

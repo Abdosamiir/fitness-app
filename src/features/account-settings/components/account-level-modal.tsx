@@ -1,30 +1,31 @@
 import { useState, useEffect } from "react"
 import { AccountModalWrapper } from "./account-modal-wrapper"
-import { ACCOUNT_LEVEL_OPTIONS } from "../lib/constants/account-settings.constant"
+import {
+  ACCOUNT_LEVEL_OPTIONS,
+  DEFAULT_ACCOUNT_SETTINGS,
+} from "../lib/constants/account-settings.constant"
 import type { AccountLevel } from "../lib/types/account-settings"
 
 interface AccountLevelModalProps {
   isOpen: boolean
   onClose: () => void
-  currentLevel?: string
+  currentLevel?: AccountLevel
   onSave: (level: AccountLevel) => Promise<void> | void
 }
 
 export function AccountLevelModal({
   isOpen,
   onClose,
-  currentLevel = "Beginner",
+  currentLevel = DEFAULT_ACCOUNT_SETTINGS.activityLevel,
   onSave,
 }: AccountLevelModalProps) {
-  const [selectedLevel, setSelectedLevel] = useState<AccountLevel>(
-    (currentLevel as AccountLevel) || "Beginner"
-  )
+  const [selectedLevel, setSelectedLevel] = useState<AccountLevel>(currentLevel)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     if (currentLevel) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSelectedLevel(currentLevel as AccountLevel)
+      setSelectedLevel(currentLevel)
     }
   }, [currentLevel, isOpen])
 
@@ -40,7 +41,7 @@ export function AccountLevelModal({
 
   return (
     <AccountModalWrapper isOpen={isOpen} onClose={onClose}>
-      <div className="p-7 sm:p-9">
+      <div className="max-h-[calc(100svh-3rem)] overflow-y-auto p-7 sm:p-9">
         {/* Heading */}
         <div className="text-center mb-7">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
@@ -54,8 +55,7 @@ export function AccountLevelModal({
         {/* Options List */}
         <div className="space-y-3.5 mb-8">
           {ACCOUNT_LEVEL_OPTIONS.map((item) => {
-            const isSelected =
-              selectedLevel.toLowerCase() === item.id.toLowerCase()
+            const isSelected = selectedLevel === item.id
 
             return (
               <button

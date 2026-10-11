@@ -10,19 +10,29 @@ export const ACCOUNT_GOAL_OPTIONS: { id: AccountGoal; label: string }[] = [
 
 export const ACCOUNT_LEVEL_OPTIONS: { id: AccountLevel; label: string; desc: string }[] = [
   {
-    id: "Beginner",
+    id: "level1",
+    label: "Rookie",
+    desc: "Taking your first steps into fitness and regular exercise",
+  },
+  {
+    id: "level2",
     label: "Beginner",
     desc: "Starting your fitness journey or returning after a break",
   },
   {
-    id: "Intermediate",
+    id: "level3",
     label: "Intermediate",
     desc: "Regular workouts 2-4 times a week with good endurance",
   },
   {
-    id: "Advanced",
+    id: "level4",
     label: "Advanced",
     desc: "Experienced athlete training consistently with high intensity",
+  },
+  {
+    id: "level5",
+    label: "True Beast",
+    desc: "Training at peak intensity with advanced strength and endurance",
   },
 ]
 
@@ -41,7 +51,7 @@ export const LANGUAGE_OPTIONS: {
 
 export const DEFAULT_ACCOUNT_SETTINGS = {
   goal: "Lose weight" as AccountGoal,
-  level: "Beginner" as AccountLevel,
+  activityLevel: "level2" as AccountLevel,
   weight: 90,
   language: "en" as LanguageCode,
 }

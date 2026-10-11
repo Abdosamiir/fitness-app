@@ -13,7 +13,10 @@ import {
   deleteAccountApi,
 } from "../apis/account-settings.api"
 import { accountSettingsKeys } from "../constants/query-keys.constant"
-import { DEFAULT_ACCOUNT_SETTINGS } from "../constants/account-settings.constant"
+import {
+  ACCOUNT_LEVEL_OPTIONS,
+  DEFAULT_ACCOUNT_SETTINGS,
+} from "../constants/account-settings.constant"
 import type {
   AccountGoal,
   AccountLevel,
@@ -39,8 +42,9 @@ export function useProfile() {
             setUser({ ...currentUser, ...user })
           }
           return {
-            goal: (user.goal as AccountGoal) || DEFAULT_ACCOUNT_SETTINGS.goal,
-            activityLevel: user.activityLevel || DEFAULT_ACCOUNT_SETTINGS.level,
+            goal: user.goal || DEFAULT_ACCOUNT_SETTINGS.goal,
+            activityLevel:
+              user.activityLevel || DEFAULT_ACCOUNT_SETTINGS.activityLevel,
             weight: user.weight ?? DEFAULT_ACCOUNT_SETTINGS.weight,
             firstName: user.firstName || "Fitness",
             lastName: user.lastName || "Member",
@@ -55,8 +59,9 @@ export function useProfile() {
       // Fallback from localStorage
       const saved = getUser()
       return {
-        goal: (saved?.goal as AccountGoal) || DEFAULT_ACCOUNT_SETTINGS.goal,
-        activityLevel: saved?.activityLevel || DEFAULT_ACCOUNT_SETTINGS.level,
+        goal: saved?.goal || DEFAULT_ACCOUNT_SETTINGS.goal,
+        activityLevel:
+          saved?.activityLevel || DEFAULT_ACCOUNT_SETTINGS.activityLevel,
         weight: saved?.weight ?? DEFAULT_ACCOUNT_SETTINGS.weight,
         firstName: saved?.firstName || "Fitness",
         lastName: saved?.lastName || "Member",
@@ -67,8 +72,9 @@ export function useProfile() {
     initialData: () => {
       const saved = getUser()
       return {
-        goal: (saved?.goal as AccountGoal) || DEFAULT_ACCOUNT_SETTINGS.goal,
-        activityLevel: saved?.activityLevel || DEFAULT_ACCOUNT_SETTINGS.level,
+        goal: saved?.goal || DEFAULT_ACCOUNT_SETTINGS.goal,
+        activityLevel:
+          saved?.activityLevel || DEFAULT_ACCOUNT_SETTINGS.activityLevel,
         weight: saved?.weight ?? DEFAULT_ACCOUNT_SETTINGS.weight,
         firstName: saved?.firstName || "Fitness",
         lastName: saved?.lastName || "Member",
@@ -103,7 +109,7 @@ export function useEditProfile() {
       if (previousProfile) {
         const updated: UserProfileData = {
           ...previousProfile,
-          ...(newProfile.goal && { goal: newProfile.goal as AccountGoal }),
+          ...(newProfile.goal && { goal: newProfile.goal }),
           ...(newProfile.activityLevel && { activityLevel: newProfile.activityLevel }),
           ...(newProfile.weight !== undefined && { weight: newProfile.weight }),
           ...(newProfile.firstName && { firstName: newProfile.firstName }),
@@ -123,7 +129,7 @@ export function useEditProfile() {
 
       return { previousProfile }
     },
-    onError: (err, newProfile, context) => {
+    onError: (err, _newProfile, context) => {
       // Rollback to previous profile on failure
       if (context?.previousProfile) {
         queryClient.setQueryData(
@@ -244,11 +250,14 @@ export function useAccountSettings() {
 
   // Update Level action (with optimistic TanStack Query update)
   const updateLevel = async (newLevel: AccountLevel) => {
+    const label =
+      ACCOUNT_LEVEL_OPTIONS.find((option) => option.id === newLevel)?.label ??
+      newLevel
     try {
       await editProfileMutation.mutateAsync({ activityLevel: newLevel })
-      toast.success(`Level updated to "${newLevel}"`)
+      toast.success(`Level updated to "${label}"`)
     } catch {
-      toast.success(`Level updated to "${newLevel}"`)
+      toast.success(`Level updated to "${label}"`)
     }
   }
 
@@ -275,7 +284,11 @@ export function useAccountSettings() {
     updateLevel,
     updateWeight,
     changePassword: changePasswordMutation.mutateAsync,
-    logout: () => logoutMutation.mutateAsync(),
-    deleteAccount: () => deleteAccountMutation.mutateAsync(),
+    logout: async () => {
+      await logoutMutation.mutateAsync()
+    },
+    deleteAccount: async () => {
+      await deleteAccountMutation.mutateAsync()
+    },
   }
 }
