@@ -106,6 +106,13 @@ export const router = createBrowserRouter([
             },
           },
           {
+            path: ROUTES.healthy,
+            lazy: {
+              Component: async () =>
+                (await import("@/pages/healthy/page")).default,
+            },
+          },
+          {
             path: ROUTES.profile,
             lazy: {
               Component: async () =>

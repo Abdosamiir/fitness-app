@@ -3,7 +3,9 @@
 import { Eye, EyeOff, Lock, Mail } from "lucide-react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { Link } from "react-router"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { ROUTES } from "@/pages/routes"
 import { Button } from "@/shared/components/ui/button"
 import { Input } from "@/shared/components/ui/input"
 import { loginSchema } from "../lib/schema/auth"
@@ -117,12 +119,12 @@ export function LoginModule() {
           )}
 
           {/* Forgot Password */}
-          <a
-            href="#"
+          <Link
+            to={ROUTES.forgetPassword}
             className="text-right font-brand text-base font-bold text-brand-500 underline"
           >
             Forgot Password?
-          </a>
+          </Link>
 
           {/* Divider */}
           <div className="flex items-center gap-3 px-12 py-4">
@@ -167,9 +169,9 @@ export function LoginModule() {
           {/* Register */}
           <p className="text-center font-brand text-base text-white">
             Dont Have An Account Yet?{" "}
-            <a href="#" className="font-bold text-brand-500">
+            <Link to={ROUTES.register} className="font-bold text-brand-500">
               Register
-            </a>
+            </Link>
           </p>
         </div>
       </form>

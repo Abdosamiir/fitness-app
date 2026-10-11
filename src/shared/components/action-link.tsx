@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { Link } from "react-router"
 
 import ArrowUpRightIcon from "@/assets/icons/arrow-up-right.svg?react"
 import { Button } from "@/shared/components/ui/button"
@@ -18,9 +19,11 @@ export function ActionLink({
   className,
 }: ActionLinkProps) {
   const isPrimary = variant === "primary"
+  const isInternal = href.startsWith("/") && !href.startsWith("//")
 
   return (
     <Button
+      nativeButton={false}
       variant={isPrimary ? "default" : "outline"}
       size="sm"
       className={cn(
@@ -30,7 +33,7 @@ export function ActionLink({
         "font-brand text-base font-bold",
         className
       )}
-      render={<a href={href} />}
+      render={isInternal ? <Link to={href} /> : <a href={href} />}
     >
       <span>{children}</span>
 

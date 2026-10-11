@@ -1,8 +1,15 @@
+import { lazy, Suspense } from "react"
 import { Outlet, useLocation } from "react-router"
 import Footer from "@/shared/components/footer/footer"
 import Header from "./header"
 import Marquee from "@/features/home/components/marquee"
 import { ROUTES } from "@/pages/routes"
+
+const ChatbotModule = lazy(() =>
+  import("@/features/chatbot/components/chatbot-module").then((module) => ({
+    default: module.ChatbotModule,
+  }))
+)
 
 /**
  * Layout route for the signed-in app: the routed page, the footer, and the
@@ -24,6 +31,9 @@ export function AppLayout() {
       </main>
       {!isProfilePage && <Marquee />}
       {!isProfilePage && <Footer />}
+      <Suspense fallback={null}>
+        <ChatbotModule />
+      </Suspense>
     </div>
   )
 }
