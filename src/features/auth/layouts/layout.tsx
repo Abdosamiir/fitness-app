@@ -14,23 +14,23 @@ export function AuthLayout() {
         {/* layer */}
         <div className="grid min-h-svh bg-black/80 lg:grid-cols-2">
           {/* Desktop brand artwork */}
-          <div className="relative hidden items-center justify-center text-primary-foreground lg:flex">
+          <div className="relative hidden min-w-0 overflow-hidden text-primary-foreground lg:block">
             <img
               src={fit1}
               alt="Super Fitness"
-              className="absolute top-[7%] left-1/2 h-auto w-56 -translate-x-1/2 object-contain"
+              className="absolute top-8 left-1/2 h-auto w-44 -translate-x-1/2 object-contain xl:top-12 xl:w-56"
             />
-            <div className="flex h-full items-end justify-center">
+            <div className="absolute inset-x-6 top-32 bottom-0 flex items-end justify-center xl:top-40">
               <img
                 src={hero}
                 alt="Super Fitness athlete"
-                className="h-[72%] max-h-150 w-auto object-contain"
+                className="h-full max-h-150 w-auto max-w-full object-contain object-bottom"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-center p-6">
-            <div className="w-full max-w-sm">
+          <div className="flex min-w-0 items-center justify-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+            <div className="w-full max-w-[486px] min-w-0">
               <Outlet />
             </div>
           </div>

@@ -19,7 +19,7 @@ type LoginFormValues = {
 export function LoginModule() {
   const [showPassword, setShowPassword] = useState(false)
   const { mutate, isPending, error } = useLoginHook()
-  
+
   const {
     register,
     handleSubmit,
@@ -38,18 +38,20 @@ export function LoginModule() {
   }
 
   return (
-    <div className="flex w-full flex-col items-center gap-6">
+    <div className="flex w-full min-w-0 flex-col items-center gap-5 text-white sm:gap-6">
       {/* Heading */}
       <div className="flex flex-col items-center gap-1.5 text-center">
         <span className="font-brand text-lg">Hey There,</span>
 
-        <h1 className="font-brand text-3xl font-bold">WELCOME BACK!</h1>
+        <h1 className="font-brand text-2xl font-bold sm:text-3xl">
+          WELCOME BACK!
+        </h1>
       </div>
 
       {/* Card */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[486px] rounded-[32px] border border-white/60 px-10 py-7"
+        className="w-full min-w-0 rounded-3xl border border-white/60 px-4 py-6 sm:rounded-[32px] sm:px-8 sm:py-7 xl:px-10"
       >
         {/* Title */}
         <span className="block text-center font-brand text-xl font-extrabold">
@@ -68,15 +70,16 @@ export function LoginModule() {
             <Input
               type="email"
               placeholder="Email"
-              autoComplete="true"
-              className="h-12 rounded-[20px] border-white/60 bg-transparent pr-3 pl-9 font-brand text-sm text-white"
+              autoComplete="email"
+              className="h-12 rounded-[20px] border-white/60 bg-transparent pr-3 pl-9 font-brand text-base text-white placeholder:text-white/60"
               {...register("email")}
             />
-           
           </div>
-           {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
-            )}
+          {errors.email && (
+            <p className="text-sm wrap-anywhere text-red-500">
+              {errors.email.message}
+            </p>
+          )}
 
           {/* Password */}
           <div className="relative">
@@ -88,16 +91,17 @@ export function LoginModule() {
 
             <Input
               type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
               placeholder="Password"
-              className="h-12 rounded-[20px] border-white/60 bg-transparent pr-8 pl-9 font-brand text-sm text-white placeholder:text-white/60 focus-visible:border-brand-500 focus-visible:ring-0"
+              className="h-12 rounded-[20px] border-white/60 bg-transparent pr-12 pl-9 font-brand text-base text-white placeholder:text-white/60 focus-visible:border-brand-500 focus-visible:ring-0"
               {...register("password")}
             />
 
-           
             <button
               type="button"
+              aria-label={showPassword ? "Hide password" : "Show password"}
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute top-1/2 right-3 -translate-y-1/2 text-white/70"
+              className="absolute top-1/2 right-1 flex size-11 -translate-y-1/2 items-center justify-center rounded-full text-white/70"
             >
               {showPassword ? (
                 <EyeOff size={20} strokeWidth={1.5} />
@@ -106,14 +110,16 @@ export function LoginModule() {
               )}
             </button>
           </div>
-           {errors.password && (
-              <p className="text-sm text-red-500 ">{errors.password.message}</p>
-            )}
+          {errors.password && (
+            <p className="text-sm wrap-anywhere text-red-500">
+              {errors.password.message}
+            </p>
+          )}
 
           {/* Error Message */}
 
           {error && (
-            <p className="text-sm text-red-500">
+            <p className="text-sm wrap-anywhere text-red-500">
               {error.message || "Failed to login"}
             </p>
           )}
@@ -121,13 +127,13 @@ export function LoginModule() {
           {/* Forgot Password */}
           <Link
             to={ROUTES.forgetPassword}
-            className="text-right font-brand text-base font-bold text-brand-500 underline"
+            className="flex min-h-11 items-center self-end text-right font-brand text-sm font-bold text-brand-500 underline sm:text-base"
           >
             Forgot Password?
           </Link>
 
           {/* Divider */}
-          <div className="flex items-center gap-3 px-12 py-4">
+          <div className="flex items-center gap-3 px-4 py-3 sm:px-12 sm:py-4">
             <div className="h-px flex-1 bg-white/50" />
 
             <span className="font-brand text-sm text-white/60">Or</span>
@@ -139,21 +145,25 @@ export function LoginModule() {
           <div className="flex justify-center gap-3 py-1">
             <button
               type="button"
-              className="flex size-8 items-center justify-center rounded-full bg-white/10 text-white"
+              className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white"
             >
-              <img src="facebook circle.svg" alt="Facebook" />{" "}
+              <img
+                src="/facebook circle.svg"
+                alt="Facebook"
+                className="size-8"
+              />
             </button>
             <button
               type="button"
-              className="flex size-8 items-center justify-center rounded-full bg-white/10 text-white"
+              className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white"
             >
-              <img src="/Google.svg" alt="Google" />
+              <img src="/Google.svg" alt="Google" className="size-8" />
             </button>
             <button
               type="button"
-              className="flex size-8 items-center justify-center rounded-full bg-white/10 text-white"
+              className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white"
             >
-              <img src="/apple.svg" alt="Apple" />
+              <img src="/apple.svg" alt="Apple" className="size-8" />
             </button>
           </div>
 
@@ -161,13 +171,13 @@ export function LoginModule() {
           <Button
             type="submit"
             disabled={isPending}
-            className="w-full rounded-full bg-brand-500 font-brand text-xs font-bold text-white hover:bg-brand-600"
+            className="h-11 w-full rounded-full bg-brand-500 font-brand text-sm font-bold text-white hover:bg-brand-600"
           >
             Login
           </Button>
 
           {/* Register */}
-          <p className="text-center font-brand text-base text-white">
+          <p className="text-center font-brand text-sm wrap-anywhere text-white sm:text-base">
             Dont Have An Account Yet?{" "}
             <Link to={ROUTES.register} className="font-bold text-brand-500">
               Register

@@ -44,16 +44,16 @@ export function OtpStep({ email, onSuccess }: OtpStepProps) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h2 className="mb-6 text-center text-4xl font-extrabold text-white">
+    <div className="flex w-full max-w-md min-w-0 flex-col items-center justify-center">
+      <h2 className="mb-4 text-center text-2xl font-extrabold text-white sm:mb-6 sm:text-4xl">
         OTP CODE
       </h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md space-y-5 rounded-[2.5rem] border border-border/40 p-10 text-center"
+        className="w-full max-w-md min-w-0 space-y-5 rounded-[2.5rem] border border-border/40 px-4 py-6 text-center sm:p-8 md:p-10"
       >
-        <p className="mb-8 text-lg font-medium text-muted">
+        <p className="mb-6 text-base font-medium text-white/70 sm:mb-8 sm:text-lg">
           Enter The OTP You Have Received
         </p>
 
@@ -66,13 +66,13 @@ export function OtpStep({ email, onSuccess }: OtpStepProps) {
               length={6}
               disabled={isVerifying}
               error={!!errors.resetCode}
-              className="mb-8"
+              className="mb-6 min-w-0 gap-1.5 sm:mb-8 sm:gap-3 [&_input]:max-w-12 [&_input]:min-w-0 [&_input]:flex-1"
             />
           )}
         />
 
         {errors.resetCode && (
-          <p className="-mt-4 mb-4 text-center text-xs text-destructive">
+          <p className="-mt-4 mb-4 text-center text-xs wrap-anywhere text-destructive">
             {errors.resetCode.message}
           </p>
         )}
@@ -81,21 +81,23 @@ export function OtpStep({ email, onSuccess }: OtpStepProps) {
           type="submit"
           disabled={isVerifying}
           className={cn(
-            "w-full rounded-full py-3.5 font-semibold transition-all duration-200",
+            "h-11 w-full rounded-full py-3.5 font-semibold transition-all duration-200",
             isVerifying && "cursor-not-allowed opacity-50"
           )}
         >
           {isVerifying ? "Verifying..." : "Confirm"}
         </Button>
 
-        <div className="mt-8 text-sm">
-          <p className="mb-1 text-muted">Didn't Receive Verification Code?</p>
+        <div className="mt-6 text-sm sm:mt-8">
+          <p className="mb-1 text-white/70">
+            Didn't Receive Verification Code?
+          </p>
           <Button
             type="button"
             variant="link"
             onClick={handleResendCode}
             disabled={isResending}
-            className="h-auto p-0 font-semibold text-primary hover:underline disabled:opacity-50"
+            className="h-11 px-3 font-semibold text-primary hover:underline disabled:opacity-50"
           >
             {isResending ? "Sending..." : "Resend Code"}
           </Button>

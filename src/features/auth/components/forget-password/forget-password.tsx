@@ -34,34 +34,34 @@ export function EmailStep({ onSuccess }: EmailStepProps) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h2 className="mb-6 text-center text-4xl font-extrabold text-white">
+    <div className="flex w-full max-w-md min-w-0 flex-col items-center justify-center">
+      <h2 className="mb-4 text-center text-2xl font-extrabold text-white sm:mb-6 sm:text-4xl">
         Forget Password
       </h2>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-md space-y-5 rounded-[2.5rem] border border-border/40 p-10 text-center"
+        className="w-full max-w-md min-w-0 space-y-5 rounded-[2.5rem] border border-border/40 px-4 py-6 text-center sm:p-8 md:p-10"
       >
-        <label className="mb-4 block text-2xl font-normal text-muted">
+        <label className="mb-4 block text-xl font-normal text-white/70 sm:text-2xl">
           Enter Your Email
         </label>
         <div className="relative">
-          <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted" />
+          <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-white/70" />
           <Input
             {...register("email")}
             type="email"
             placeholder="Email"
             disabled={isPending}
             className={cn(
-              "w-full rounded-lg border border-input bg-transparent py-2 pr-4 pl-10 text-sm text-foreground transition-colors focus:ring-2 focus:ring-primary focus:outline-none",
+              "h-11 w-full rounded-lg border border-input bg-transparent py-2 pr-4 pl-10 text-base text-white transition-colors placeholder:text-white/60 focus:ring-2 focus:ring-primary focus:outline-none",
               errors.email && "border-destructive focus:ring-destructive",
               isPending && "cursor-not-allowed opacity-50"
             )}
           />
         </div>
         {errors.email && (
-          <p className="text-md mt-2 text-destructive">
+          <p className="mt-2 text-sm wrap-anywhere text-destructive">
             {errors.email.message}
           </p>
         )}
@@ -69,7 +69,7 @@ export function EmailStep({ onSuccess }: EmailStepProps) {
           type="submit"
           disabled={isPending}
           className={cn(
-            "mt-2 w-full rounded-full px-2 py-2 font-semibold transition-all duration-200",
+            "mt-2 h-11 w-full rounded-full px-2 py-2 font-semibold transition-all duration-200",
             isPending
               ? "cursor-not-allowed opacity-50"
               : "bg-primary hover:bg-brand-600"
