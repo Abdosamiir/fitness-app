@@ -1,6 +1,6 @@
-import groupWorkoutImage from "@/features/home/assets/group-workout.png"
-import muscleBuildingImage from "@/features/home/assets/muscle-building.png"
-import personalTrainingImage from "@/features/home/assets/personal-training.png"
+import groupWorkoutImage from "@/assets/imgs/group-workout.png"
+import muscleBuildingImage from "@/assets/imgs/muscle-building.png"
+import personalTrainingImage from "@/assets/imgs/personal-training.png"
 
 import type {
   Workout,

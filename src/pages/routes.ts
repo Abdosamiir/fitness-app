@@ -13,6 +13,8 @@ home: "/",
   about: "/about",
   classes: "/classes",
   healthy: "/healthy",
+  profile: "/profile",
+  accountSettings: "/account-settings",
 } as const;
 
 export type RoutePath = (typeof ROUTES)[keyof typeof ROUTES]

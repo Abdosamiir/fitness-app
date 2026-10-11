@@ -11,9 +11,9 @@ import { AppLayout } from "@/shared/layout/app-layout"
 import { HomePage } from "@/pages/home/page"
 import { ProtectedRoute } from "@/pages/protected-route"
 import { ROUTES } from "@/pages/routes"
-import { AboutPage } from "./about/page"
-import { ClassesPage } from "@/pages/classes/page"
-import HealthyPage from "./healthy/page"
+import { AboutPage } from "./about/page";
+import { ClassesPage } from "@/pages/classes/page";
+import { AccountSettingsPage } from "@/pages/account-settings/page";
 
 export const router = createBrowserRouter([
   {
@@ -53,7 +53,8 @@ export const router = createBrowserRouter([
           { index: true, element: <HomePage /> },
           { path: ROUTES.about, element: <AboutPage /> },
           { path: ROUTES.classes, element: <ClassesPage /> },
-          { path: ROUTES.healthy, element: <HealthyPage /> },
+          { path: ROUTES.profile, element: <AccountSettingsPage /> },
+          { path: ROUTES.accountSettings, element: <AccountSettingsPage /> },
         ],
       },
     ],
