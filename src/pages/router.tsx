@@ -1,5 +1,5 @@
-import { createBrowserRouter } from "react-router";
-import { ForgotPasswordScreen } from "@/features/auth/components/forget-password/forget-password-mainscreen";
+import { createBrowserRouter } from "react-router"
+import { ForgotPasswordScreen } from "@/features/auth/components/forget-password/forget-password-mainscreen"
 import { LoginPage } from "@/pages/auth/login/page"
 import { RegisterPage } from "@/pages/auth/register/page"
 import { GenderStepPage } from "@/pages/auth/onboarding/gender/page"
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       { path: ROUTES.login, element: <LoginPage /> },
-    { path: ROUTES.forgetPassword, element: <ForgotPasswordScreen /> },
+      { path: ROUTES.forgetPassword, element: <ForgotPasswordScreen /> },
     ],
   },
   {
@@ -56,8 +56,6 @@ export const router = createBrowserRouter([
           { path: ROUTES.profile, element: <AccountSettingsPage /> },
           { path: ROUTES.accountSettings, element: <AccountSettingsPage /> },
         ],
-       
-        
       },
     ],
   },
