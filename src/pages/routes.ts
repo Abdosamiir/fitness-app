@@ -13,6 +13,8 @@ home: "/",
   about: "/about",
   classes: "/classes",
   healthy: "/healthy",
+  profile: "/profile",
+  accountSettings: "/account-settings",
 } as const;
 
 export type RoutePath = (typeof ROUTES)[keyof typeof ROUTES]
@@ -20,4 +22,7 @@ export type RoutePath = (typeof ROUTES)[keyof typeof ROUTES]
 /** Links rendered in the app shell nav, in order. */
 export const NAV_ITEMS: { to: RoutePath; label: string }[] = [
   { to: ROUTES.home, label: "Home" },
+  { to: ROUTES.about, label: "About" },
+  { to: ROUTES.classes, label: "Classes" },
+  { to: ROUTES.healthy, label: "Healthy" },
 ]

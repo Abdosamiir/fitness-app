@@ -1,13 +1,21 @@
+import { AboutSection } from "@/shared/components/about-us-section";
+import HealthySection from "@/features/home/components/healthy/healthy-section"
+import Hero from "@/features/home/components/hero";
+import Marquee from "@/features/home/components/marquee";
+import { UpcomingWorkoutsSection } from "@/features/home/components/upcoming-workouts-section";
+import WhyUs from "@/features/home/components/why-us";
+
+
 export function HomePage() {
-  return (
-    <div className="py-16">
-      <h1 className="text-xl font-semibold">
-        Welcome
-      </h1>
-      <p className="mt-1 text-sm text-muted-foreground">
-        You&apos;re signed in. Add your features under{" "}
-        <code className="font-mono">src/features/</code>.
-      </p>
+  return (<>
+    <div className="py-16 w-full">
+       <Hero />
+       <Marquee />
+      <AboutSection />
+      <UpcomingWorkoutsSection />
+      <WhyUs />
+      <HealthySection />
     </div>
+    </>
   )
 }
