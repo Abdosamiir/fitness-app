@@ -5,9 +5,9 @@ import Marquee from "@/features/home/components/marquee"
 import { ROUTES } from "@/pages/routes"
 
 /**
- * Layout route for the signed-in app: a header (brand + account), a primary
- * nav row, and the routed page below. Only ever rendered inside
- * `<ProtectedRoute>`, so a session is always present here.
+ * Layout route for the signed-in app: the routed page, the footer, and the
+ * floating Smart Coach chatbot. Only ever rendered inside `<ProtectedRoute>`,
+ * so a session is always present here.
  */
 export function AppLayout() {
   const location = useLocation()

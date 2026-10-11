@@ -6,7 +6,7 @@ import { clsx } from "clsx"
 import { NAVIGATION_ITEMS } from "@/shared/lib/constants/navigation.constant"
 import { ActionLink } from "@/shared/components/action-link"
 import { Button } from "@/shared/components/ui/button"
-import { Container } from "./container"
+import { Container } from "@/shared/layout/container"
 
 import { getAccessToken } from "@/features/auth/lib/utils/token"
 import { getUser } from "@/features/auth/lib/utils/user"

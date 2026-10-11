@@ -1,4 +1,4 @@
-import { Container } from "../../../shared/layout/container"
+import { Container } from "@/shared/layout/container"
 import { ActionLink } from "../../../shared/components/action-link"
 import { HERO_CONTENT } from "../lib/constants/hero.constant"
 
@@ -78,36 +78,6 @@ export default function Hero() {
             alt=""
             className="block w-[min(42vw,440px)] object-contain object-bottom xl:w-[min(45vw,500px)]"
           />
-        </div>
-
-        {/* Ask Me Assistant */}
-        <div className="relative z-30 mt-8 flex justify-center md:absolute md:right-4 md:bottom-4 md:mt-0 md:block lg:right-6 xl:right-10">
-          <a
-            href={HERO_CONTENT.assistant.href}
-            aria-label={HERO_CONTENT.assistant.label}
-            className="group flex flex-col items-center outline-none"
-          >
-            {/* Robot */}
-            <div className="relative w-24 motion-safe:animate-[assistant-float_4s_ease-in-out_infinite] motion-reduce:animate-none sm:w-28 md:w-32 lg:w-27 xl:w-30">
-              {/* Glow */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute top-1/2 left-1/2 -z-10 size-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/30 blur-3xl transition-all duration-500 group-hover:scale-125 group-hover:bg-primary/45 sm:size-28 md:size-32 lg:size-36 xl:size-40"
-              />
-
-              <img
-                src="/images/ask-me.png"
-                alt=""
-                draggable={false}
-                className="relative block h-auto w-full object-contain drop-shadow-[0_8px_20px_rgba(255,70,20,0.25)] transition-transform duration-300 ease-out select-none group-hover:scale-105 group-hover:-rotate-2 motion-reduce:transition-none"
-              />
-            </div>
-
-            {/* Button */}
-            <span className="relative z-10 -mt-2 inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 font-brand text-xs font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-primary/40 after:absolute after:inset-0 after:-z-10 after:rounded-full after:bg-primary/40 after:opacity-60 after:blur-md after:transition-opacity after:duration-300 group-hover:after:opacity-100">
-              {HERO_CONTENT.assistant.label}
-            </span>
-          </a>
         </div>
       </Container>
     </section>
