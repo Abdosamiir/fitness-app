@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Dumbbell } from "lucide-react"
+import { FULL_BODY_WORKOUTS } from "@/features/classes/lib/constants/classes.constant"
 
 import { WorkoutCard } from "@/features/home/components/workout-card"
 import {
@@ -12,6 +13,11 @@ import { cn } from "@/shared/lib/utils/utils"
 export function UpcomingWorkoutsSection() {
   const [activeCategory, setActiveCategory] =
     useState<WorkoutCategory>("Full Body")
+
+  // Keep the featured design for Full Body; reuse the team's category catalog.
+  const displayedWorkouts = activeCategory === "Full Body"
+    ? FEATURED_WORKOUTS
+    : FULL_BODY_WORKOUTS.filter((workout) => workout.category === activeCategory)
 
   return (
     <section
@@ -70,8 +76,8 @@ export function UpcomingWorkoutsSection() {
           </div>
 
           <div className="mt-7 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-3 lg:grid lg:grid-cols-3 lg:overflow-visible">
-            {FEATURED_WORKOUTS.map((workout) => (
-              <WorkoutCard key={workout.id} workout={workout} />
+            {displayedWorkouts.map((workout) => (
+              <WorkoutCard key={workout.id} workout={workout} category={activeCategory} />
             ))}
           </div>
 
