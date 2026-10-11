@@ -1,8 +1,8 @@
-import { Outlet } from "react-router"
+import { Outlet, useLocation } from "react-router"
+import Footer from "@/shared/components/footer/footer"
 import Header from "./header"
 import Marquee from "@/features/home/components/marquee"
-import { ChatbotModule } from "@/features/chatbot/components/chatbot-module"
-import Footer from "@/shared/components/footer/footer"
+import { ROUTES } from "@/pages/routes"
 
 /**
  * Layout route for the signed-in app: the routed page, the footer, and the
@@ -10,17 +10,20 @@ import Footer from "@/shared/components/footer/footer"
  * so a session is always present here.
  */
 export function AppLayout() {
+  const location = useLocation()
+  const isProfilePage =
+    location.pathname === ROUTES.profile ||
+    location.pathname === ROUTES.accountSettings
+
   return (
     <div className="flex min-h-svh flex-col">
       <Header />
-      <main className="flex-1 px-4">
+      <main className={`flex-1 ${isProfilePage ? "px-0" : "px-4"}`}>
         {/* Full width: each section owns its background and inner container */}
         <Outlet />
       </main>
-      <Marquee />
-      <Footer />
-
-      <ChatbotModule />
+      {!isProfilePage && <Marquee />}
+      {!isProfilePage && <Footer />}
     </div>
   )
 }
