@@ -11,7 +11,7 @@ export default function useLoginHook() {
   return useMutation({
     mutationFn: async (data: LoginFormValues) => {
       const response = await axios.post<LoginType>(
-        `${import.meta.env.VITE_API_URL}/api/v1/auth/signin`,
+        `${import.meta.env.VITE_API_URL}/auth/signin`,
         data
       )
 
