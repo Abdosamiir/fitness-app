@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/shared/lib/constants/api.constanst"
 import { useMutation } from "@tanstack/react-query"
 
 import { useRegistration } from "./use-registration"
@@ -56,8 +57,6 @@ export function useRegisterActivityStep() {
 
   const mutation = useMutation({
     mutationFn: async (activityLevel: ActivityLevel) => {
-      const API_URL = import.meta.env.VITE_API_URL
-
       const payload: RegisterPayload = {
         firstName: draft.firstName,
         lastName: draft.lastName,
@@ -74,7 +73,7 @@ export function useRegisterActivityStep() {
 
       console.log(payload)
 
-      const response = await fetch(`${API_URL}/auth/signup`, {
+      const response = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

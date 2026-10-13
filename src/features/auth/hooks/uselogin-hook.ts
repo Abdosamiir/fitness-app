@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/shared/lib/constants/api.constanst"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 
@@ -11,7 +12,7 @@ export default function useLoginHook() {
   return useMutation({
     mutationFn: async (data: LoginFormValues) => {
       const response = await axios.post<LoginType>(
-        `${import.meta.env.VITE_API_URL}/auth/signin`,
+        `${API_BASE_URL}/auth/signin`,
         data
       )
 
